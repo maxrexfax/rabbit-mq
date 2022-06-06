@@ -10,25 +10,24 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 $connection = new AMQPStreamConnection('localhost', 5672, 'user', 'bitnami');
 $channel = $connection->channel();
 
-$channel->queue_declare('hello', false, false, false, false);
+$channel->exchange_declare('tomato', 'topic', false, false, false);
+
+list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
 
 echo " [*] Waiting for messages. To exit press CTRL+C\n";
 
-$callback = function ($msg) {  
-    if (is_numeric($msg->body)) {
-      echo $msg->body . " is number!\n";
-    } else {
-      echo ' [x] Received ', $msg->body, "\n";
-    }
-    try {
-      $tmpHeaders = $msg->get('application_headers');
-    } catch(Exception $ex) {
-      $tmpHeaders = 'EMPTY!';
-    }
-    echo 'Headers:' . $tmpHeaders . "\n";
+
+
+//$binding_key = array_slice($argv, 1);
+$channel->queue_bind($queue_name, 'tomato', $argv[1]);
+
+echo '$argv[1]:' . $argv[1] . "\n";
+
+$callback = function ($msg) {      
+      echo ' [x] Received ', $msg->body, "\n";    
   };
   
-$channel->basic_consume('hello', '', false, true, false, false, $callback);
+$channel->basic_consume($queue_name, '', false, true, false, false, $callback);
 
   while ($channel->is_open()) {
       $channel->wait();
