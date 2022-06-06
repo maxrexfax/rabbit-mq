@@ -2,11 +2,19 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 require "tomatoGenerator.php";
-$connection = new AMQPStreamConnection('localhost', 5672, 'user', 'bitnami');
+
+$host = 'localhost';
+$port = 5672;
+$username = 'user';
+$password = 'bitnami';
+
+$connection = new AMQPStreamConnection($host, $port, $username, $password);
+
 $channel = $connection->channel();
 
 $channel->exchange_declare('tomato', 'topic', false, false, false);
