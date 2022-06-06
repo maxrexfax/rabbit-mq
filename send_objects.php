@@ -21,9 +21,6 @@ foreach($arrayOfObjects as $tomato) {
     $channel->basic_publish($msg, 'tomato', $tomato->tomatoColor);
 }
 
-
-
-
 echo " [x] Sent few objects\n";
 
 $channel->close();

@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
 require_once __DIR__ . '/vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
@@ -14,14 +13,11 @@ $channel->exchange_declare('tomato', 'topic', false, false, false);
 
 list($queue_name, ,) = $channel->queue_declare("", false, false, true, false);
 
-echo " [*] Waiting for messages. To exit press CTRL+C\n";
-
-
-
-//$binding_key = array_slice($argv, 1);
 $channel->queue_bind($queue_name, 'tomato', $argv[1]);
 
-echo '$argv[1]:' . $argv[1] . "\n";
+echo 'Getting tomato of color:' . $argv[1] . "\n";
+echo " [*] Waiting for messages. To exit press CTRL+C\n";
+
 
 $callback = function ($msg) {      
       echo ' [x] Received ', $msg->body, "\n";    
@@ -32,6 +28,5 @@ $channel->basic_consume($queue_name, '', false, true, false, false, $callback);
   while ($channel->is_open()) {
       $channel->wait();
   }
-
 
 ?>
