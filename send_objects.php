@@ -20,6 +20,7 @@ $channel = $connection->channel();
 $channel->exchange_declare('tomato',
                             'topic',
                             false,
+    false,
                             false,
                             false);
 
@@ -31,6 +32,8 @@ foreach($arrayOfObjects as $tomato) {
     $msg = new AMQPMessage(serialize($tomato));
     
     $channel->basic_publish($msg, 'tomato', $tomato->tomatoColor);
+    echo serialize($tomato) . "\n";
+    echo 'Sending tomato with color:'  . $tomato->tomatoColor . "\n";
 }
 
 echo " [x] Sent few objects\n";
