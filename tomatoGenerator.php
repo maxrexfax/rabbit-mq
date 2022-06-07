@@ -1,12 +1,7 @@
 <?php
-class Tomato {
-    public $tomatoColor;
-    public $numb;
 
-    function __construct($colorIn) {
-        $this->tomatoColor = $colorIn;
-    }
-}
+require "Tomato.php";
+
 
 function getRandomObjects() {
     $tmpArray = [];

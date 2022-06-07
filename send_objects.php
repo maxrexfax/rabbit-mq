@@ -17,14 +17,18 @@ $connection = new AMQPStreamConnection($host, $port, $username, $password);
 
 $channel = $connection->channel();
 
-$channel->exchange_declare('tomato', 'topic', false, false, false);
+$channel->exchange_declare('tomato',
+                            'topic',
+                            false,
+                            false,
+                            false);
 
 $arrayOfObjects = getRandomObjects();
 //var_dump($arrayOfObjects);
 
 foreach($arrayOfObjects as $tomato) {
 
-    $msg = new AMQPMessage('Message: tomato.' . $tomato->tomatoColor);
+    $msg = new AMQPMessage(serialize($tomato));
     
     $channel->basic_publish($msg, 'tomato', $tomato->tomatoColor);
 }
