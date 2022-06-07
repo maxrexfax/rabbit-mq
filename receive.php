@@ -18,7 +18,7 @@ $channel = $connection->channel();
 $channel->exchange_declare('tomato',
                             'topic',
                             false,
-    false,
+    true,
                             false);
 
 //$sessionId = uniqid($argv[1] . '_', true);
@@ -27,7 +27,7 @@ echo "Session ID:" . $sessionId . "\n";
 
 list($queue_name, ,) = $channel->queue_declare($sessionId,
                                             false,
-    false,
+    true,
                                             false,
                                             false);
 

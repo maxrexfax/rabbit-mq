@@ -20,7 +20,7 @@ $channel = $connection->channel();
 $channel->exchange_declare('tomato',
                             'topic',
                             false,
-    false,
+    true,
                             false,
                             false);
 
