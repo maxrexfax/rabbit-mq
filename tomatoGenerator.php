@@ -3,7 +3,7 @@
 require "Tomato.php";
 
 
-function getRandomObjects($countOfObjects) {
+function getRandomObjects($countOfObjects, $nameOfColor) {
     $tmpArray = [];
     $tmpColor = '';
     for ($i = 1; $i <= $countOfObjects; $i++) {
@@ -16,6 +16,10 @@ function getRandomObjects($countOfObjects) {
             $tmpColor = 'green';
         } else {
             $tmpColor = 'blue';
+        }
+
+        if ($nameOfColor !== null) {
+            $tmpColor = $nameOfColor;
         }
 
         $tmpArray[] = new Tomato($tmpColor);

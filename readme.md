@@ -23,9 +23,10 @@ example:
 php receiveAll.php "#"
 ```
 
-File send_objects.php can be used without arguments, or can be set number of objects to send
+File send_objects.php can be used without arguments, 
+or can be set number AND color of objects to send
 example:
-send 5 (default)
+send 5 with random color (default)
 ```sh
 php send_objects.php
 ```
@@ -34,3 +35,14 @@ send 24
 ```sh
 php send_objects.php 24
 ```
+
+
+send 24 with blue color
+```sh
+php send_objects.php 24 blue
+```
+Colors
+-red
+-green
+-yellow
+-blue

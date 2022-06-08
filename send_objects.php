@@ -25,11 +25,17 @@ $channel->exchange_declare('tomato',
                             false);
 
 $countOfObjects = 5;
+$nameOfColor = null;
 
 if (isset($argv[1])) {
     $countOfObjects = $argv[1];
 }
-$arrayOfObjects = getRandomObjects($countOfObjects);
+
+if (isset($argv[2])) {
+    $nameOfColor = $argv[2];
+}
+
+$arrayOfObjects = getRandomObjects($countOfObjects, $nameOfColor);
 //var_dump($arrayOfObjects);
 
 foreach($arrayOfObjects as $tomato) {
