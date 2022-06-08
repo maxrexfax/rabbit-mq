@@ -3,10 +3,10 @@
 require "Tomato.php";
 
 
-function getRandomObjects() {
+function getRandomObjects($countOfObjects) {
     $tmpArray = [];
     $tmpColor = '';
-    for ($i = 0; $i < 6; $i++) {
+    for ($i = 1; $i <= $countOfObjects; $i++) {
         $counter = rand(1, 12);
         if ($counter > 0 && $counter < 4) {
             $tmpColor = 'red';

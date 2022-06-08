@@ -20,11 +20,16 @@ $channel = $connection->channel();
 $channel->exchange_declare('tomato',
                             'topic',
                             false,
-    true,
+                            true,
                             false,
                             false);
 
-$arrayOfObjects = getRandomObjects();
+$countOfObjects = 5;
+
+if (isset($argv[1])) {
+    $countOfObjects = $argv[1];
+}
+$arrayOfObjects = getRandomObjects($countOfObjects);
 //var_dump($arrayOfObjects);
 
 foreach($arrayOfObjects as $tomato) {
